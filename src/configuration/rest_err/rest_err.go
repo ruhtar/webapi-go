@@ -14,6 +14,13 @@ type Causes struct {
 	Message string `json:"message"`
 }
 
+//Este método faz parte da interface error do pacote padrão do Go.
+//Para que uma estrutura implemente a interface error, ela deve ter um método Error() que retorna uma string.
+//Isso permite que a estrutura seja tratada como um erro padrão em Go.
+func (r *RestErr) Error() string {
+	return r.Message
+}
+
 func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 	return &RestErr{
 		Message: message,
